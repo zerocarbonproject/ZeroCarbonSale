@@ -1,0 +1,22 @@
+# npm
+node_modules/
+
+# Truffle
+/build
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+### More
+.project
+.settings
+test/testchain/geth
+test/testchain/geth.ipc
+test/testchain/history

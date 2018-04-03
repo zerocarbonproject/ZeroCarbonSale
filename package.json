@@ -1,0 +1,25 @@
+{
+  "name": "energis-sale",
+  "version": "1.0.0",
+  "description": "Energis Token Sale Contracts",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerocarbonproject/energis-sale.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Philip Louw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zerocarbonproject/energis-sale/issues"
+  },
+  "homepage": "https://github.com/zerocarbonproject/energis-sale#readme",
+  "dependencies": {
+    "zeppelin-solidity": "^1.7.0"
+  }
+}
