@@ -6,6 +6,13 @@ import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import "zeppelin-solidity/contracts/ownership/Claimable.sol";
 import "zeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
+/**
+ * @title PrivatePreSale
+ * 
+ * Private Pre-sale contract for Energis tokens
+ *
+ * (c) Philip Louw / Zero Carbon Project 2018. The MIT Licence.
+ */
 contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
   using SafeMath for uint256;
 

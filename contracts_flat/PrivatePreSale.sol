@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.21;
 
 // File: zeppelin-solidity/contracts/ownership/Ownable.sol
 
@@ -36,7 +36,7 @@ contract Ownable {
    */
   function transferOwnership(address newOwner) public onlyOwner {
     require(newOwner != address(0));
-    OwnershipTransferred(owner, newOwner);
+    emit OwnershipTransferred(owner, newOwner);
     owner = newOwner;
   }
 
@@ -72,7 +72,7 @@ contract Claimable is Ownable {
    * @dev Allows the pendingOwner address to finalize the transfer.
    */
   function claimOwnership() onlyPendingOwner public {
-    OwnershipTransferred(owner, pendingOwner);
+    emit OwnershipTransferred(owner, pendingOwner);
     owner = pendingOwner;
     pendingOwner = address(0);
   }
@@ -167,7 +167,7 @@ contract Pausable is Claimable {
    */
   function pause() onlyOwner whenNotPaused public {
     paused = true;
-    Pause();
+    emit Pause();
   }
 
   /**
@@ -175,7 +175,7 @@ contract Pausable is Claimable {
    */
   function unpause() onlyOwner whenPaused public {
     paused = false;
-    Unpause();
+    emit Unpause();
   }
 }
 
@@ -256,18 +256,25 @@ contract ERC20 is ERC20Basic {
 
 // File: contracts/PrivatePreSale.sol
 
+/**
+ * @title PrivatePreSale
+ * 
+ * Private Pre-sale contract for Energis tokens
+ *
+ * (c) Philip Louw / Zero Carbon Project 2018. The MIT Licence.
+ */
 contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
   using SafeMath for uint256;
 
   
   // Wallet Address for funds
-  address public FUNDS_WALLET = address(0);
+  address public constant FUNDS_WALLET = address(0);
   // Token Wallet Address
-  address public TOKEN_WALLET = address(0);
+  address public constant TOKEN_WALLET = address(0);
   // Token adderss being sold
-  address public TOKEN_ADDRESS = address(0);
+  address public constant TOKEN_ADDRESS = address(0);
   // Token being sold
-  ERC20 public TOKEN;
+  ERC20 public constant TOKEN = ERC20(TOKEN_ADDRESS);
   // Conversion Rate (Eth cost of 1 NRG) (Testing uses ETH price of $10 000)
   uint256 public constant TOKENS_PER_ETH = 100000;
   // Max NRG tokens to sell
@@ -307,12 +314,7 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
   // -----------------------------------------
 
 
-  function PrivatePreSale(address fundsWallet, address tokenAddress, address tokenWallet) public {
-    FUNDS_WALLET = fundsWallet;
-    TOKEN_WALLET = tokenWallet;
-    TOKEN_ADDRESS = tokenAddress;
-    TOKEN = ERC20(TOKEN_ADDRESS);
-
+  function PrivatePreSale() public {
     require(TOKENS_PER_ETH > 0);
     require(FUNDS_WALLET != address(0));
     require(TOKEN_WALLET != address(0));
@@ -386,7 +388,7 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
     FUNDS_WALLET.transfer(msg.value);
 
     // Event trigger
-    TokenPurchase(msg.sender, _beneficiary, weiAmount, tokenAmount);
+    emit TokenPurchase(msg.sender, _beneficiary, weiAmount, tokenAmount);
   }
 
   /**
