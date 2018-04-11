@@ -1,13 +1,8 @@
-// #1 Get an instance of the contract to be deployed/migrated
-var KycContract = artifacts.require("./KycContract.sol");
-var Test01 = artifacts.require("./Test01.sol");
-var Test02 = artifacts.require("./Test02.sol");
-
-
+var SimpleToken = artifacts.require("./SimpleToken.sol");
+var PrivatePreSale = artifacts.require("./PrivatePreSale.sol");
+ 
 module.exports = function(deployer) {
-  // #2 Deploy the instance of the contract
-  deployer.deploy(KycContract).then(function() {
-    return deployer.deploy(Test01,KycContract.address);
+  deployer.deploy(SimpleToken).then(function() {
+    deployer.deploy(PrivatePreSale,0xf17f52151ebef6c7334fad080c5704d77216b732, SimpleToken.address, 0x627306090abab3a6e1400e9345bc60c78a8bef57);
   });
-  deployer.deploy(Test02);
 };

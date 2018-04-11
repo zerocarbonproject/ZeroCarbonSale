@@ -6,20 +6,20 @@
   "directories": {
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zerocarbonproject/energis-sale.git"
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "zeppelin-solidity": "^1.8.0"
   },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Philip Louw",
   "license": "MIT",
+  "homepage": "https://github.com/zerocarbonproject/energis-sale#readme",
   "bugs": {
     "url": "https://github.com/zerocarbonproject/energis-sale/issues"
-  },
-  "homepage": "https://github.com/zerocarbonproject/energis-sale#readme",
-  "dependencies": {
-    "zeppelin-solidity": "^1.7.0"
   }
 }

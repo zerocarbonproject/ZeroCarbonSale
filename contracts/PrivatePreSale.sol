@@ -11,21 +11,21 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
 
   
   // Wallet Address for funds
-  address public constant FUNDS_WALLET = address(0);
+  address public FUNDS_WALLET = address(0);
   // Token Wallet Address
-  address public constant TOKEN_WALLET = address(0);
+  address public TOKEN_WALLET = address(0);
   // Token adderss being sold
-  address public constant TOKEN_ADDRESS = address(0);
+  address public TOKEN_ADDRESS = address(0);
   // Token being sold
-  ERC20 public constant TOKEN = ERC20(TOKEN_ADDRESS);
-  // Conversion Rate (Eth cost of 1 NRG)
-  uint256 public constant TOKENS_PER_ETH = 0;
+  ERC20 public TOKEN;
+  // Conversion Rate (Eth cost of 1 NRG) (Testing uses ETH price of $10 000)
+  uint256 public constant TOKENS_PER_ETH = 100000;
   // Max NRG tokens to sell
   uint256 public constant MAX_TOKENS = 4000000 * (10**18);
   // Min investment in Tokens
   uint256 public constant MIN_TOKEN_INVEST = 300000 * (10**18);
   // Token sale start date
-  uint256 public constant START_DATE = 1522749798;
+  uint256 public START_DATE = 1522749798;
 
   // -----------------------------------------
   // State Variables
@@ -51,12 +51,18 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
    */
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint256 value, uint256 amount);
 
+
   // -----------------------------------------
   // Constructor
   // -----------------------------------------
 
 
-  function PrivatePreSale() public {
+  function PrivatePreSale(address fundsWallet, address tokenAddress, address tokenWallet) public {
+    FUNDS_WALLET = fundsWallet;
+    TOKEN_WALLET = tokenWallet;
+    TOKEN_ADDRESS = tokenAddress;
+    TOKEN = ERC20(TOKEN_ADDRESS);
+
     require(TOKENS_PER_ETH > 0);
     require(FUNDS_WALLET != address(0));
     require(TOKEN_WALLET != address(0));
@@ -75,6 +81,23 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
    */
   function capReached() public view returns (bool) {
     return tokensIssued >= MAX_TOKENS;
+  }
+
+  /**
+   * @dev Closes the sale, can only be called once. Once closed can not be opened again.
+   */
+  function closeSale() public onlyOwner {
+    require(!closed);
+    closed = true;
+  }
+
+  /**
+   * @dev Returns the amount of tokens given for the amount in Wei
+   * @param _weiAmount Value in wei
+   */
+  function getTokenAmount(uint256 _weiAmount) public pure returns (uint256) {
+    // Amount in wei (10**18 wei == 1 eth) and the token is 18 decimal places
+    return _weiAmount.mul(TOKENS_PER_ETH);
   }
 
   /**
@@ -136,22 +159,5 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
 
     // Test hard cap
     require(tokensIssued.add(_tokenAmount) <= MAX_TOKENS);
-  }
-
-  /**
-   * @dev Returns the amount of tokens given for the amount in Wei
-   * @param _weiAmount Value in wei
-   */
-  function getTokenAmount(uint256 _weiAmount) internal pure returns (uint256) {
-    // Amount in wei (10**18 wei == 1 eth) and the token is 18 decimal places
-    return _weiAmount.mul(TOKENS_PER_ETH);
-  }
-
-  /**
-   * @dev Closes the sale, can only be called once. Once closed can not be opened again.
-   */
-  function closeSale() public onlyOwner {
-    require(!closed);
-    closed = true;
   }
 }

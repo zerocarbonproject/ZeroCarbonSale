@@ -8,6 +8,7 @@ module.exports = {
       gasPrice: 10000000000
     },
     development: {
+      // Ganache
       host: "localhost",
       port: 7545,
       network_id: "*", // Match any network id
