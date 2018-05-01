@@ -268,21 +268,21 @@ contract PrivatePreSale is Claimable, KYCWhitelist, Pausable {
 
   
   // Wallet Address for funds
-  address public constant FUNDS_WALLET = address(0);
+  address public constant FUNDS_WALLET = 0xDc17D222Bc3f28ecE7FCef42EDe0037C739cf28f;
   // Token Wallet Address
-  address public constant TOKEN_WALLET = address(0);
+  address public constant TOKEN_WALLET = 0x1EF91464240BB6E0FdE7a73E0a6f3843D3E07601;
   // Token adderss being sold
-  address public constant TOKEN_ADDRESS = address(0);
+  address public constant TOKEN_ADDRESS = 0x2169Cce281717d204FA0EcF846a6171e96234D72;
   // Token being sold
   ERC20 public constant TOKEN = ERC20(TOKEN_ADDRESS);
   // Conversion Rate (Eth cost of 1 NRG) (Testing uses ETH price of $10 000)
-  uint256 public constant TOKENS_PER_ETH = 100000;
+  uint256 public constant TOKENS_PER_ETH = 6740;
   // Max NRG tokens to sell
-  uint256 public constant MAX_TOKENS = 4000000 * (10**18);
+  uint256 public constant MAX_TOKENS = 20000000 * (10**18);
   // Min investment in Tokens
   uint256 public constant MIN_TOKEN_INVEST = 300000 * (10**18);
   // Token sale start date
-  uint256 public START_DATE = 1522749798;
+  uint256 public START_DATE = 1525176000;
 
   // -----------------------------------------
   // State Variables
