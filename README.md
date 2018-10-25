@@ -1,11 +1,10 @@
-# energis-sale
+# ZeroCarbon Token Sale
 
-Energis Token Sale contracts
+ZeroCarbon Token Sale contracts
 
 
 ## Contracts
 
-Please see the cotnracts directory.
+Please see the contracts directory.
 
-* MultiSigWallet.sol - Multisignature Wallets used
 * PrivatePreSale.sol - Private presale contract

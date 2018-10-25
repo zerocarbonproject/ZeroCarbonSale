@@ -1,25 +1,35 @@
 {
-  "name": "energis-sale",
+  "name": "zero-carbon-sale",
   "version": "1.0.0",
-  "description": "Energis Token Sale Contracts",
+  "description": "ZeroCarbonSale",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^2.0.2",
-    "zeppelin-solidity": "^1.8.0"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "truffle test",
+    "coverage": "scripts/coverage.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerocarbonproject/ZeroCarbonSale.git"
   },
   "author": "Philip Louw",
   "license": "MIT",
-  "homepage": "https://github.com/zerocarbonproject/energis-sale#readme",
   "bugs": {
-    "url": "https://github.com/zerocarbonproject/energis-sale/issues"
+    "url": "https://github.com/zerocarbonproject/ZeroCarbonSale/issues"
+  },
+  "homepage": "https://github.com/zerocarbonproject/ZeroCarbonSale#readme",
+  "dependencies": {
+    "openzeppelin-solidity": "^1.12.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "babel-register": "^6.23.0",
+    "solidity-coverage": "^0.5.8"
   }
 }
